@@ -12,3 +12,26 @@ However there is no official support of the Autoware Universe self-driving open 
 ## Getting started tutorial
 
 Go to [Getting started](getting-started.md) tutorial to setup and launch autoware simulation with CARLA simulator.
+
+
+
+## the differences between the current git and the original one
+I have merged the traffic signal information of Carla and Autoware together. 
+
+I have improved the content in the tutorial section.
+
+
+
+## My System
+### Hardware
+- RTX 3080
+- CPU I7 9700KF
+- RAM 32GB
+### Software
+- Ubuntu 20.04
+- Nvidia-Driver 530
+- CUDA 11.6
+- cuDNN 8.7.0
+- ROS2 Foxy
+- Autoware Universe Docker Humble
+- Carla 0.9.13

@@ -5,6 +5,9 @@ Warning! This is **Work in Progress** repository. Reports and improvement sugges
 
 ![demo_with_traffic](images/demo_with_traffic.png)
 
+![image](https://user-images.githubusercontent.com/110883172/235323835-ff28b58b-4dbc-4a88-9400-ce87799acee6.png)
+
+
 ## Why carla_autoware_bridge is required?
 
 However there is no official support of the Autoware Universe self-driving open source project from CARLA developers, there is a maintained `carla_ros_bridge`, which supports communication between CARLA simulator and ROS2 applications. This ROS2 package reuses `carla_ros_bridge` and adds missing things to support communicating with the Autoware Universe.

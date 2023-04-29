@@ -38,3 +38,5 @@ I have improved the content in the tutorial section.
 - ROS2 Foxy
 - Autoware Universe Docker Humble
 - Carla 0.9.13
+
+There is an issue with the odometry of Carla and Autoware not matching in my version, possibly due to a version problem

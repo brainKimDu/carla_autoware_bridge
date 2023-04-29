@@ -5,29 +5,45 @@ Warning! This is **Work in Progress** tutorial. Reports and improvement suggesti
 ## Requirements
 
 * Ubuntu 20.04
-* ROS2 Galactic
+* ROS2 Foxy
+* Autoware Universe Docker Humble
+* Carla 0.9.13
+
 
 ## Step 1. CARLA installation 
 
-Install [CARLA server 0.9.12](https://carla.readthedocs.io/en/0.9.12/start_quickstart/#carla-installation) and [carla client 0.9.12](https://carla.readthedocs.io/en/0.9.12/start_quickstart/#carla-0912).
+Install [CARLA server 0.9.13](https://carla.readthedocs.io/en/0.9.13/start_quickstart/#carla-installation) and [carla client 0.9.13](https://carla.readthedocs.io/en/0.9.13/start_quickstart/#carla-0913).
 
-Currently `carla-ros-bridge` has the latest 0.9.12 tag, so it is recommended to use exact the same CARLA simulator and client.
+Currently `carla-ros-bridge` has the latest 0.9.13 tag, so it is recommended to use exact the same CARLA simulator and client.
 
-Check the CARLA with [Running CARLA steps](https://carla.readthedocs.io/en/0.9.12/start_quickstart/#running-carla) if needed.
+Check the CARLA with [Running CARLA steps](https://carla.readthedocs.io/en/0.9.13/start_quickstart/#running-carla) if needed.
 
-## Step 2. Autoware installation
+## Step 2. Autoware Docker installation
 
-Install [Autoware Universe](https://autowarefoundation.github.io/autoware-documentation/galactic/installation/autoware/source-installation/) from `galactic` branch.
+Install [Autoware Universe](https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/docker-installation-devel/) 
 
-Currently some problems might occur if you are using galactic docker version (such as [galactic or foxy rviz error](https://github.com/ros2/rviz/issues/753)). If so, use source installation instead.
+The Autoware docker is a humble version.
+
 
 ## Step 3. carla-ros-bridge installation
+
+```
+cd
+mkdir ws
+cd ws
+mkdir src
+cd src
+git clone https://github.com/autowarefoundation/autoware_msgs
+git clone https://github.com/carla-simulator/ros-bridge.git
+git clone https://github.com/Robotics010/carla_autoware_bridge.git
+```
+To operate the bridge, you need to install the autoware message package and carla-ros bridge in the same workspace
 
 Clone my fork of [`carla-ros-bridge`](https://github.com/Robotics010/ros-bridge) to your workspace. This fork has several changes:
 
 * change imu frame_id to `tamagawa/imu_link`
 * change lidar frame_id to `velodyne_top`
-* add ring field to lidar messages
+* add ring field to lidar messages  
 
 And build it with the following commands:
 
@@ -37,6 +53,9 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
 Then download and prepare the map for CARLA town 1. For that clone [autoware-contents](https://bitbucket.org/carla-simulator/autoware-contents/src/master/), copy `maps/point_cloud_maps/Town01.pcd` and `maps/vector_maps/lanelet2/Town01.osm` to `~/autoware_map/carla-town-1/` and rename to `pointcloud_map.pcd` and `lanelet2_map.osm` accordingly.
+
+However, there is no traffic signal information in this map. Therefore, you need to download a map that contains traffic signal information. Although I could only find a map with traffic signal information in Town01, it would be useful to utilize it
+[autoware carla map](https://drive.google.com/drive/folders/1Sup2ASfhVccONCSdlkt06bgnheVF-VE8)
 
 ## Step 4. carla-autoware-bridge installation
 

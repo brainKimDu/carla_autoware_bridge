@@ -18,11 +18,13 @@ Currently `carla-ros-bridge` has the latest 0.9.13 tag, so it is recommended to 
 
 Check the CARLA with [Running CARLA steps](https://carla.readthedocs.io/en/0.9.13/start_quickstart/#running-carla) if needed.
 
+
 ## Step 2. Autoware Docker installation
 
 Install [Autoware Universe](https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/docker-installation-devel/) 
 
 The Autoware docker is a humble version.
+
 
 
 ## Step 3. carla-ros-bridge installation
@@ -57,6 +59,8 @@ Then download and prepare the map for CARLA town 1. For that clone [autoware-con
 However, there is no traffic signal information in this map. Therefore, you need to download a map that contains traffic signal information. Although I could only find a map with traffic signal information in Town01, it would be useful to utilize it
 [autoware carla map](https://drive.google.com/drive/folders/1Sup2ASfhVccONCSdlkt06bgnheVF-VE8)
 
+
+
 ## Step 4. carla-autoware-bridge installation
 
 Clone [`carla-autoware-bridge`](https://github.com/Robotics010/carla_autoware_bridge) to your workspace and build it with the following commands:
@@ -65,6 +69,8 @@ Clone [`carla-autoware-bridge`](https://github.com/Robotics010/carla_autoware_br
 source /opt/ros/galactic/setup.bash
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
+
+
 
 ## Step 5. Temporary workarounds
 
@@ -164,7 +170,7 @@ You might find these arguments useful while executing CARLA:
 
 In order to launch `carla_ros_bridge` and `carla_autoware_bridge`:
 ```
-source /opt/ros/galactic/setup.bash
+source /opt/ros/foxy/setup.bash
 source ~/autoware/install/setup.bash
 ros2 launch carla_autoware_bridge carla_ros_bridge.launch.py
 ```
@@ -178,7 +184,7 @@ Here you can add `port:=3000` argument to switch to a different CARLA port for i
 You need to spawn a vehicle with it's sensors:
 
 ```
-source /opt/ros/galactic/setup.bash
+source /opt/ros/foxy/setup.bash
 source ~/autoware/install/setup.bash
 ros2 launch carla_autoware_bridge carla_autoware_ego_vehicle.launch.py
 ```
@@ -190,7 +196,7 @@ where `~/autoware` is a path to your workspace with cloned `carla_ros_bridge` an
 You can find it useful to launch and manual control window. It shows your ego vehicle from a third view in the CARLA world. And you can switch it to manual control from keyboard if it is necessary.
 
 ```
-source /opt/ros/galactic/setup.bash
+source /opt/ros/foxy/setup.bash
 source ~/autoware/install/setup.bash
 ros2 launch carla_manual_control carla_manual_control.launch.py
 ```
@@ -202,9 +208,15 @@ where `~/autoware` is a path to your workspace with cloned `carla_ros_bridge`.
 And finally launch autoware software stack with the following commands:
 
 ```
-source /opt/ros/galactic/setup.bash
+source /opt/ros/foxy/setup.bash
 source ~/autoware/install/setup.bash
-ros2 launch autoware_launch e2e_simulator.launch.xml map_path:=$HOME/autoware_map/carla-town-1 vehicle_model:=sample_vehicle sensor_model:=sample_sensor_kit
+ros2 launch autoware_launch planning_simulator.launch.xml map_path:=$HOME/autoware_map/carla-town-1 vehicle_model:=sample_vehicle sensor_model:=sample_sensor_kit
 ```
+
+```
+ros2 run carla_autoware_bridge traffic_light
+```
+Since only three traffic signals were selected and verified for their operation, it is necessary to match the IDs of Carla and Autoware.
+
 
 where `~/autoware` is a path to your workspace with cloned Autoware Universe installed.
